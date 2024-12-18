@@ -62,7 +62,6 @@
 			children = (
 				6150480F2D13432D00997B92 /* Views */,
 				615048102D13433300997B92 /* Model */,
-				6150480D2D1342B800997B92 /* Fetch Data.swift */,
 				2E619E752D133E000053A131 /* Assets.xcassets */,
 				2E619E772D133E000053A131 /* DAWG.entitlements */,
 				2E619E782D133E000053A131 /* Preview Content */,
@@ -92,6 +91,7 @@
 		615048102D13433300997B92 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6150480D2D1342B800997B92 /* Fetch Data.swift */,
 				615048152D13437A00997B92 /* ViewState.swift */,
 			);
 			path = Model;
