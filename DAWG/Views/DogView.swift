@@ -5,4 +5,15 @@
 //  Created by Marcus Lord (student LM) on 12/18/24.
 //
 
-import Foundation
+import SwiftUI
+
+struct DogView: View {
+    var body: some View {
+        Text("List")
+    }
+    
+}
+
+#Preview {
+    DogView()
+}

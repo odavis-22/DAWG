@@ -8,15 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var viewState: ViewState = .ListView
+    @State var articleURL: String = ""
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, OWEN!")
+        
+        if viewState == .ListView {
+        ListView()
+        } else {
+       DogView()
         }
-        .padding()
-    }
+        
+        }
 }
 
 #Preview {
