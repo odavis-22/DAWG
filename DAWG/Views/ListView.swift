@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct ListView: View {
-    var body: some View {
-        Text("List")
-    }
+    @Binding var viewState: ViewState
+    @State var data: FetchData = FetchData()
     
-}
+    
+    var body: some View {
+        
+        for Breed in 1...10 {
+            Text(Breed)
+        }
+        
+    }
+}       
 
 #Preview {
-    ListView()
-}
+                ListView(viewState: .constant(.ListView))
+            }

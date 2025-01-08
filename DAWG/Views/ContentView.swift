@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @State var viewState: ViewState = .ListView
-    @State var articleURL: String = ""
 
     var body: some View {
         

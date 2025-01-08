@@ -8,3 +8,39 @@
 import Foundation
 
 
+struct FetchData{
+    
+    var response: Response = Response()
+    
+    mutating func getData() async{
+        let URLString = "https://dog.ceo/api/breeds/list/all"
+        
+        guard let url = URL(string: URLString) else {return}
+        
+        let (data, _) = try! await URLSession.shared.data(from: url)
+        response = try! JSONDecoder().decode(Response.self, from: data)
+        
+        let dataString = String(data: data, encoding: .utf8)
+        print(dataString ?? " ")
+    }
+}
+
+struct Response: Codable {
+    
+    struct message{
+        var breeds: [Breed] = []
+    }
+    
+    var status: String = ""
+    
+}
+
+struct Breed: Codable {
+    var breed: String
+    var subbreeds: [String]
+}
+
+extension Breed: Identifiable {
+    var id: String {breed ?? " "}
+}
+
