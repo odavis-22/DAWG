@@ -14,13 +14,23 @@ struct ListView: View {
     
     var body: some View {
         
-        for Breed in 1...10 {
-            Text(Breed)
+        NavigationView{
+            
+            List (data.response.images){ link in
+                    
+                NavigationLink{
+                    DogView()
+                }label: {
+                    Text(link)
+                }
+                
+            }
         }
+       
         
     }
 }       
 
 #Preview {
-                ListView(viewState: .constant(.ListView))
+                ListView(viewState: .constant(.listview))
             }

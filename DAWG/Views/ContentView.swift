@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var viewState: ViewState = .ListView
+    @State var viewState: ViewState = .listview
 
     var body: some View {
         
-        if viewState == .ListView {
-        ListView()
+        if viewState == .listview {
+            ListView(viewState: $viewState)
         } else {
        DogView()
         }

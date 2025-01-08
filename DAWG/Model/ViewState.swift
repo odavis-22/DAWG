@@ -8,5 +8,5 @@
 import Foundation
 
 enum ViewState{
-    case ListView, DogView
+    case listview, dogview
 }
