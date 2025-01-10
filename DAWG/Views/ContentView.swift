@@ -9,17 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var viewState: ViewState = .listview
+    @State var viewState: ViewState = .listView
 
     var body: some View {
         
-        if viewState == .listview {
-            ListView(viewState: $viewState)
-        } else {
-       DogView()
-        }
         
-        }
+         ListView(viewState: $viewState)
+        
+        
+    }
 }
 
 #Preview {

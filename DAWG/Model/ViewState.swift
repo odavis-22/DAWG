@@ -7,6 +7,7 @@
 
 import Foundation
 
-enum ViewState{
-    case listview, dogview
+enum ViewState: Equatable {
+    case listView
+    case dogView(breed: String, subbreed: String?)  // Make subbreed optional
 }
