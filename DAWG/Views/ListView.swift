@@ -9,62 +9,80 @@ import SwiftUI
 
 struct ListView: View {
     @Binding var viewState: ViewState
-    @State var data: FetchData = FetchData()
+    @StateObject var data = FetchData()  // Use @StateObject to observe FetchData class
     
     @State private var breeds: [String] = []  // List to hold breed names
-    
+
     var body: some View {
         NavigationView {
+            
             VStack {
                 // Show a loading indicator if data is not fetched yet
                 if breeds.isEmpty {
                     Text("Loading breeds...")
                         .font(.headline)
                         .padding()
-                }
-                
-                ScrollView {
-                    ForEach(breeds, id: \.self) { breed in
-                        VStack(alignment: .leading) {
-                            // Breed Button
-                            NavigationLink(destination: DogView(breed: breed, subbreed: nil)) {
-                                Text(breed)
+                } else {
+                    ScrollView {
+                        ForEach(breeds, id: \.self) { breed in
+                            NavigationLink(
+                                destination: SubbreedListView(breed: breed, subbreeds: data.response.message[breed] ?? [])
+                            ) {
+                                Text(breed.capitalized)
                                     .font(.title)
                                     .padding()
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(Color.blue)
+                                    .background(Color.black)
                                     .foregroundColor(.white)
-                                    .cornerRadius(8)
-                            }
-                            
-                            // Subbreed Buttons (if they exist)
-                            if let subbreeds = data.response.message.breeds[breed], !subbreeds.isEmpty {
-                                ForEach(subbreeds, id: \.self) { subbreed in
-                                    NavigationLink(destination: DogView(breed: breed, subbreed: subbreed)) {
-                                        Text("\(breed) - \(subbreed)")
-                                            .font(.subheadline)
-                                            .padding()
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            .background(Color.green)
-                                            .foregroundColor(.white)
-                                            .cornerRadius(8)
-                                    }
-                                }
+                                    .cornerRadius(20)
+                                    .padding()
                             }
                         }
-                        .padding(.vertical, 5)
                     }
                 }
-                .navigationBarTitle("Dog Breeds")
-                .onAppear {
-                    // Fetch data and update breeds
-                    Task {
-                        await data.getData()
-                        breeds = Array(data.response.message.breeds.keys)  // Populate breed list after fetching
-                        print("Breeds: \(breeds)")  // Debugging output
-                    }
+            }
+            .navigationBarTitle("Dog Breeds")
+            .onAppear {
+                // Fetch data and update breeds
+                Task {
+                    await data.getData()
+                    breeds = Array(data.response.message.keys).sorted()  // Populate and sort breed list after fetching
                 }
             }
         }
     }
 }
+
+struct SubbreedListView: View {
+    var breed: String
+    var subbreeds: [String]
+
+    var body: some View {
+        VStack {
+            if subbreeds.isEmpty {
+                // If there are no subbreeds, go directly to DogView
+                DogView(breed: breed, subbreed: nil)
+            } else {
+                // Show a list of subbreeds
+                ScrollView {
+                    ForEach(subbreeds, id: \.self) { subbreed in
+                        NavigationLink(destination: DogView(breed: breed, subbreed: subbreed)) {
+                            Text(subbreed.capitalized)
+                                .font(.title2)
+                                .padding()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(Color.gray)
+                                .foregroundColor(.white)
+                                .cornerRadius(20)
+                                .padding()
+                        }
+                    }
+                }
+            }
+        }
+        .navigationBarTitle("\(breed.capitalized) Subbreeds", displayMode: .inline)
+    }
+}
+
+
+

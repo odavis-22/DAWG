@@ -1,48 +1,43 @@
 //
-//  Fetch Data.swift
+//  FetchData.swift
 //  DAWG
 //
 //  Created by Marcus Lord (student LM) on 12/18/24.
 //
+
 import Foundation
 
-struct FetchData {
-    var response: Response = Response(status: "success", message: Response.Message(breeds: [:]))
-    
-    mutating func getData() async {
-        let URLString = "https://dog.ceo/api/breeds/list/all"
+class FetchData: ObservableObject {
+    @Published var response: DogAPIResponse = DogAPIResponse(message: [:], status: "")
+
+    // Asynchronous function to fetch data from the Dog API
+    func getData() async {
+        let urlString = "https://dog.ceo/api/breeds/list/all"
         
-        guard let url = URL(string: URLString) else {
+        guard let url = URL(string: urlString) else {
             print("Invalid URL")
             return
         }
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            let decodedResponse = try JSONDecoder().decode(Response.self, from: data)
-            response = decodedResponse  // Update the response object with the decoded data
+            let decodedResponse = try JSONDecoder().decode(DogAPIResponse.self, from: data)
             
-            // Debugging output: check the decoded breeds
-            print("Decoded breeds: \(response.message.breeds)")
+            // Update the response on the main thread
+            DispatchQueue.main.async {
+                self.response = decodedResponse
+            }
             
+            // Debugging output
+            print("Decoded breeds: \(self.response.message)")
+
         } catch {
             print("Error fetching or decoding data: \(error)")
         }
     }
-
 }
 
-struct Response: Codable {
+struct DogAPIResponse: Codable {
+    var message: [String: [String]]  // Dictionary of breeds and their subbreeds
     var status: String
-    var message: Message
-    
-    struct Message: Codable {
-        // `breeds` is now a dictionary with breed names as keys and subbreeds as values (arrays)
-        var breeds: [String: [String]]
-        
-        // Initializer to handle the breeds dictionary
-        init(breeds: [String: [String]] = [:]) {
-            self.breeds = breeds
-        }
-    }
 }

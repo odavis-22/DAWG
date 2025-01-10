@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E0EA9DC2D31A55500337459 /* Fetch Data 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0EA9DB2D31A55500337459 /* Fetch Data 2.swift */; };
 		2E619E722D133DFF0053A131 /* DAWGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E619E712D133DFF0053A131 /* DAWGApp.swift */; };
 		2E619E742D133DFF0053A131 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E619E732D133DFF0053A131 /* ContentView.swift */; };
 		2E619E762D133E000053A131 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E619E752D133E000053A131 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E0EA9DB2D31A55500337459 /* Fetch Data 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetch Data 2.swift"; sourceTree = "<group>"; };
 		2E619E6E2D133DFF0053A131 /* DAWG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DAWG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E619E712D133DFF0053A131 /* DAWGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAWGApp.swift; sourceTree = "<group>"; };
 		2E619E732D133DFF0053A131 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 		615048102D13433300997B92 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2E0EA9DB2D31A55500337459 /* Fetch Data 2.swift */,
 				6150480D2D1342B800997B92 /* Fetch Data.swift */,
 				615048152D13437A00997B92 /* ViewState.swift */,
 			);
@@ -171,6 +174,7 @@
 				615048122D13435A00997B92 /* DogView.swift in Sources */,
 				615048162D13437A00997B92 /* ViewState.swift in Sources */,
 				615048142D13436200997B92 /* ListView.swift in Sources */,
+				2E0EA9DC2D31A55500337459 /* Fetch Data 2.swift in Sources */,
 				6150480E2D1342B800997B92 /* Fetch Data.swift in Sources */,
 				2E619E722D133DFF0053A131 /* DAWGApp.swift in Sources */,
 			);

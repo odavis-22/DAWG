@@ -10,26 +10,35 @@ import SwiftUI
 struct DogView: View {
     var breed: String
     var subbreed: String?
-    
+    @StateObject var fetchData2 = FetchData2()  // Use FetchData2 to fetch images
+
     var body: some View {
         VStack {
-            Text("Breed: \(breed)")
-                .font(.largeTitle)
-                .padding()
-            
-            if let subbreed = subbreed {
-                Text("Subbreed: \(subbreed)")
-                    .font(.title)
+            if fetchData2.images.isEmpty {
+                Text("Loading images...")
+                    .font(.headline)
                     .padding()
             } else {
-                Text("No subbreed selected")
-                    .font(.subheadline)
-                    .padding()
+                ScrollView {
+                    ForEach(fetchData2.images, id: \.self) { imageUrl in
+                        AsyncImage(url: URL(string: imageUrl)) { image in
+                            image
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(10)
+                                .padding(.bottom)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                }
             }
         }
-        .navigationBarTitle("\(breed) \(subbreed != nil ? "- \(subbreed!)" : "")")
+        .navigationBarTitle(subbreed == nil ? breed.capitalized : "\(breed.capitalized) - \(subbreed!.capitalized)", displayMode: .inline)
+        .onAppear {
+            Task {
+                await fetchData2.getImages(breed: breed, subbreed: subbreed)
+            }
+        }
     }
 }
-
-
-
