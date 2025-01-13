@@ -8,9 +8,9 @@
 import Foundation
 
 class FetchData2: ObservableObject {
-    @Published var images: [String] = []  // List to hold image URLs
-
-    // Asynchronous function to fetch images for a specific breed or subbreed
+   @Published  var images: [String] = []
+    
+    
     func getImages(breed: String, subbreed: String? = nil) async {
         let urlString: String
         if let subbreed = subbreed {
@@ -31,12 +31,12 @@ class FetchData2: ObservableObject {
                 self.images = decodedResponse.message
             }
         } catch {
-            print("Error fetching or decoding images: \(error)")
+            print("Error \(error)")
         }
     }
 }
 
 struct DogImageResponse: Codable {
-    var message: [String]  // Array of image URLs
+    var message: [String]
     var status: String
 }
