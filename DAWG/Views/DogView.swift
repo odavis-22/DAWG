@@ -10,15 +10,11 @@ import SwiftUI
 struct DogView: View {
     var breed: String
     var subbreed: String?
-    @StateObject var fetchData2 = FetchData2()  // Use FetchData2 to fetch images
+    @StateObject var fetchData2 = FetchData2()
 
     var body: some View {
         VStack {
-            if fetchData2.images.isEmpty {
-                Text("Loading images...")
-                    .font(.headline)
-                    .padding()
-            } else {
+           
                 ScrollView {
                     ForEach(fetchData2.images, id: \.self) { imageUrl in
                         AsyncImage(url: URL(string: imageUrl)) { image in
@@ -32,9 +28,8 @@ struct DogView: View {
                         }
                     }
                 }
-            }
         }
-        .navigationBarTitle(subbreed == nil ? breed.capitalized : "\(breed.capitalized) - \(subbreed!.capitalized)", displayMode: .inline)
+        .navigationBarTitle(subbreed == nil ? breed : "\(breed) - \(subbreed!)")
         .onAppear {
             Task {
                 await fetchData2.getImages(breed: breed, subbreed: subbreed)

@@ -9,5 +9,5 @@ import Foundation
 
 enum ViewState: Equatable {
     case listView
-    case dogView(breed: String, subbreed: String?)  // Make subbreed optional
+    case dogView(breed: String, subbreed: String?) 
 }

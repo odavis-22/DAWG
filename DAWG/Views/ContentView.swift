@@ -13,10 +13,8 @@ struct ContentView: View {
 
     var body: some View {
         
-        ZStack{
-            ListView(viewState: $viewState)
-           
-        }
+                    ListView(viewState: $viewState)
+        
         
     }
 }
@@ -24,3 +22,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
